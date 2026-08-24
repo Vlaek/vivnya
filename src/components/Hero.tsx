@@ -1,5 +1,6 @@
 import { ArrowDown } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
+import { assetPath } from '../content/assetPath';
 
 export function Hero() {
   const { t } = useTranslation();
@@ -7,7 +8,7 @@ export function Hero() {
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero__art" aria-hidden="true">
-        <img src="/og-vivnya.png" alt="" />
+        <img src={assetPath('/og-vivnya.png')} alt="" />
       </div>
       <div className="hero__content">
         <div className="flex flex-col gap-2">
