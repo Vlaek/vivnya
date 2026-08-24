@@ -7,8 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build && node scripts/prepare-sites-build.mjs",
     "build:pages": "tsc -b && cross-env GITHUB_PAGES=true vite build",
+    "deploy": "npm run check && git push origin main",
     "test": "cross-env NODE_OPTIONS=--no-experimental-webstorage vitest run",
-    "check": "tsc -b --noEmit && npm run test && vite build && node scripts/prepare-sites-build.mjs && node --test tests/sites-worker.test.mjs",
+    "check": "tsc -b --noEmit && npm run test && vite build && node scripts/prepare-sites-build.mjs && node --test tests/sites-worker.test.mjs tests/deployment-config.test.mjs",
     "preview": "vite preview",
     "test:sites": "node --test tests/sites-worker.test.mjs"
   },

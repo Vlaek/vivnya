@@ -12,7 +12,7 @@ describe('projects', () => {
 
   it('uses canonical ArtStation titles and local gallery images without card numbers', () => {
     expect(projects.map((project) => project.title)).toEqual([
-      'Wolf promo.',
+      'Wolf promo',
       "Koshchei's Horde",
       'Koshchei',
       'Slavic creatures and spirits',

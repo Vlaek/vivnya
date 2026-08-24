@@ -17,7 +17,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: 'wolf', title: 'Wolf promo.', href: 'https://www.artstation.com/artwork/ndE4bK',
+    id: 'wolf', title: 'Wolf promo', href: 'https://www.artstation.com/artwork/ndE4bK',
     image: assetPath('/artworks/wolf/logo.jpg'), translationKey: 'projects.wolf', focalPoint: '50% 50%', featured: true,
     gallery: [
       { src: assetPath('/artworks/wolf-promo.jpg'), altKey: 'projects.wolf.gallery.0' },

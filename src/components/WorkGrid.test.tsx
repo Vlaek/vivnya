@@ -8,7 +8,7 @@ describe('WorkGrid', () => {
   it('renders canonical titles in a responsive Tailwind grid without numbering', () => {
     const { container } = render(<WorkGrid />);
 
-    expect(screen.getByRole('heading', { name: 'Wolf promo.' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: 'Wolf promo' })).toBeVisible();
     expect(screen.queryByText('01')).not.toBeInTheDocument();
     expect(container.querySelector('#work > .grid')).toHaveClass(
       'grid-cols-1',

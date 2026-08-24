@@ -17,6 +17,6 @@ describe('LanguageSwitch', () => {
 
     expect(document.documentElement).toHaveAttribute('lang', 'en');
     expect(localStorage.getItem('vivnya-language')).toBe('en');
-    expect(document.title).toBe('Vivnya — 2D Artist & Concept Art');
+    expect(document.title).toBe('Milana Zubareva. Vivnya');
   });
 });
