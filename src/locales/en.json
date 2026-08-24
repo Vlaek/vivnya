@@ -1,0 +1,59 @@
+{
+  "language": {
+    "label": "Language selection",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "seo": {
+    "title": "Vivnya — 2D Artist & Concept Art",
+    "description": "Portfolio of Milana Zubareva (Vivnya), a 2D artist creating illustration and concept art for game projects."
+  },
+  "a11y": { "skip": "Skip to content", "home": "Vivnya — home", "navigation": "Portfolio navigation" },
+  "nav": { "work": "Work", "about": "About", "contact": "Contact" },
+  "hero": {
+    "name": "Milana Zubareva",
+    "role": "2D Artist",
+    "location": "Saint Petersburg, Russia"
+  },
+  "work": {
+    "eyebrow": "Portfolio",
+    "title": "Selected work",
+    "open": "{{title}} — open on ArtStation",
+    "viewGallery": "{{title}} — open gallery"
+  },
+  "lightbox": {
+    "close": "Close gallery",
+    "previous": "Previous image",
+    "next": "Next image",
+    "thumbnails": "Gallery thumbnails",
+    "image": "Image {{current}} of {{total}}"
+  },
+  "projects": {
+    "wolf": { "category": "Promo art", "alt": "Golden wolf standing in a luminous forest surrounded by a shadowy pack", "gallery": ["Golden wolf promo art with the project logo", "Golden wolf promo art without the project logo"] },
+    "horde": { "category": "Character concept", "alt": "Four stylized fantasy members of Koshchei’s horde", "gallery": ["Koshchei's Horde character lineup", "Koshchei's Horde character concept one", "Koshchei's Horde character concept two", "Koshchei's Horde character concept three", "Koshchei's Horde character concept four"] },
+    "koshchei": { "category": "Character concept", "alt": "Armored undead king Koshchei holding a sword and a glowing stone", "gallery": ["Final Koshchei character concept", "Koshchei character design process"] },
+    "spirits": { "category": "Creature concept", "alt": "Four Slavic fantasy creatures including a werewolf, Sirin and forest spirit", "gallery": ["Slavic creatures and spirits lineup", "Forest monster concept", "Sirin bird concept", "Volkolak concept", "Blud spirit concept"] },
+    "animals": { "category": "Creature concept", "alt": "Stylized deer, wolf, boar and hare character lineup", "gallery": ["Stylized animal lineup", "Deer concept", "Wolf concept", "Boar concept", "Hare concept", "Deer silhouettes", "Animal silhouette lineup", "Hare silhouettes"] }
+  },
+  "about": {
+    "eyebrow": "Artist profile",
+    "title": "About",
+    "lead": "I create illustrations and concept art for game projects — from the first sketch to the final render.",
+    "body": "I focus on clear technical requirements and visual consistency across every production stage. I respond quickly to feedback and work closely with teams to turn ideas into polished, coherent worlds.",
+    "specialtyLabel": "Specialty",
+    "specialty": ["Concept art", "Illustration"],
+    "toolsLabel": "Tools",
+    "tools": ["Adobe Photoshop", "Procreate"],
+    "interestLabel": "Available for",
+    "interest": ["Full-time", "Contract", "Freelance"]
+  },
+  "contact": {
+    "eyebrow": "Available for new projects",
+    "title": "Let’s create something memorable.",
+    "descriptionBefore": "For commissions, collaborations and work opportunities, reach me through ",
+    "descriptionAfter": ".",
+    "action": "Contact on ArtStation",
+    "location": "Saint Petersburg · Russia",
+    "copyright": "© {{year}} Milana Zubareva / Vivnya"
+  }
+}
