@@ -4,7 +4,7 @@
 
 **Goal:** Add the supplied portrait to the contact section, preserve headline dominance with a `1.08` line height, and make layered pupils follow a fine pointer across the full page.
 
-**Architecture:** A focused `TrackingPortrait` component owns the image, centered decorative eye layers, per-eye cursor vectors, viewport-level event handling, animation-frame scheduling, and listener cleanup. `Contact` composes that component into a responsive asymmetric grid while locale files provide the image alternative text. Styling stays in the existing global stylesheet and uses the existing surface, line, spacing, and motion tokens.
+**Architecture:** A focused `TrackingPortrait` component owns the pupil-free image, two pupil-only layers positioned inside the artwork's existing eye contours, per-eye cursor vectors, viewport-level event handling, animation-frame scheduling, and listener cleanup. `Contact` composes that component into a responsive asymmetric grid while locale files provide the image alternative text. Styling stays in the existing global stylesheet and uses the existing surface, line, spacing, and motion tokens.
 
 **Tech Stack:** React 19, TypeScript, CSS/Tailwind v4 utilities, i18next, Vitest, Testing Library.
 
@@ -19,7 +19,7 @@
 
 - [x] **Step 1: Copy the supplied portrait into the public artwork directory**
 
-Copy `C:\Users\Vlad\AppData\Local\Temp\codex-clipboard-dfcf0531-0e10-481b-a10e-16b52e39389a.png` to `public/artworks/contact-portrait.png` without modifying the source file.
+Copy the final pupil-free source `C:\Users\Vlad\AppData\Local\Temp\codex-clipboard-09662688-9472-458b-9d8b-35e58228034f.png` to `public/artworks/contact-portrait.png` without modifying the source file.
 
 - [x] **Step 2: Write failing component tests**
 
@@ -27,11 +27,11 @@ Create tests that render `<TrackingPortrait alt="Character at a computer" />`, a
 
 ```tsx
 expect(screen.getByRole('img', { name: 'Character at a computer' })).toBeInTheDocument();
-fireEvent.pointerMove(screen.getByTestId('tracking-portrait'), { clientX: 1000, clientY: 1000 });
+fireEvent.pointerMove(window, { clientX: 50, clientY: 0, pointerType: 'mouse' });
 expect(screen.getByTestId('pupil-left')).toHaveStyle({
-  transform: 'translate3d(calc(-50% + 8px), calc(-50% + 8px), 0)',
+  transform: 'translate3d(calc(-50% + 1px), calc(-50% + -5px), 0)',
 });
-fireEvent.pointerLeave(screen.getByTestId('tracking-portrait'));
+fireEvent.blur(window);
 expect(screen.getByTestId('pupil-left')).toHaveStyle({
   transform: 'translate3d(-50%, -50%, 0)',
 });
@@ -45,47 +45,75 @@ Expected: FAIL because `TrackingPortrait.tsx` does not exist.
 
 - [x] **Step 4: Implement the minimal component**
 
-Implement a figure with `data-testid="tracking-portrait"`, the portrait image, and two `aria-hidden="true"` eye overlays. Install one window-level pointer listener, bail out unless fine hover matches and reduced motion does not, and reject touch pointer events. In one scheduled animation frame, derive a unit vector from each eye rectangle's center to the cursor, multiply it by the safe `6px` movement radius, and write a direct `translate3d` transform to the matching pupil. Cancel a pending frame during replacement and unmount. Reset both transforms to center on window blur, touch input, or reduced motion.
+Implement a figure with `data-testid="tracking-portrait"`, the pupil-free portrait image, and two `aria-hidden="true"` positioning boxes containing only the pupils. Install one window-level pointer listener, bail out unless fine hover matches and reduced motion does not, and reset on touch pointer events. In one scheduled animation frame, derive a unit vector from each eye rectangle's center to the cursor, multiply it by the safe `5px` movement radius, and write a direct `translate3d` transform to the matching pupil. Cancel a pending frame during replacement and unmount. Reset both transforms to center on window blur, touch input, or reduced motion.
 
 ```tsx
-type TrackingPortraitProps = { alt: string };
+import { useEffect, useRef } from 'react';
+import { assetPath } from '../content/assetPath';
 
-const clamp = (value: number) => Math.max(-1, Math.min(1, value));
+const centeredTransform = 'translate3d(-50%, -50%, 0)';
+const pupilTravel = 5;
 
-export function TrackingPortrait({ alt }: TrackingPortraitProps) {
-  const frameRef = useRef<HTMLElement>(null);
+export function TrackingPortrait({ alt }: { alt: string }) {
+  const eyeRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const pupilRefs = useRef<Array<HTMLElement | null>>([]);
-  const rafRef = useRef<number | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
 
-  const setOffset = (x: number, y: number) => {
-    const transform = x === 0 && y === 0
-      ? 'translate3d(-50%, -50%, 0)'
-      : `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`;
-    pupilRefs.current.forEach((pupil) => {
-      if (pupil) pupil.style.transform = transform;
-    });
-  };
+  useEffect(() => {
+    const resetPupils = () => {
+      if (animationFrameRef.current !== null) cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+      pupilRefs.current.forEach((pupil) => {
+        if (pupil) pupil.style.transform = centeredTransform;
+      });
+    };
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = clamp((event.clientX - (rect.left + rect.width / 2)) / (rect.width / 2));
-    const y = clamp((event.clientY - (rect.top + rect.height / 2)) / (rect.height / 2));
-    if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => setOffset(Math.round(x * 8), Math.round(y * 8)));
-  };
+    const handlePointerMove = (event: PointerEvent) => {
+      const canTrack = event.pointerType !== 'touch'
+        && window.matchMedia('(hover: hover) and (pointer: fine)').matches
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!canTrack) return resetPupils();
+      if (animationFrameRef.current !== null) cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = requestAnimationFrame(() => {
+        eyeRefs.current.forEach((eye, index) => {
+          const pupil = pupilRefs.current[index];
+          if (!eye || !pupil) return;
+          const rect = eye.getBoundingClientRect();
+          const x = event.clientX - (rect.left + rect.width / 2);
+          const y = event.clientY - (rect.top + rect.height / 2);
+          const distance = Math.hypot(x, y);
+          const offsetX = distance === 0 ? 0 : Math.round((x / distance) * pupilTravel);
+          const offsetY = distance === 0 ? 0 : Math.round((y / distance) * pupilTravel);
+          pupil.style.transform = offsetX === 0 && offsetY === 0
+            ? centeredTransform
+            : `translate3d(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px), 0)`;
+        });
+        animationFrameRef.current = null;
+      });
+    };
 
-  useEffect(() => () => {
-    if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('blur', resetPupils);
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('blur', resetPupils);
+      if (animationFrameRef.current !== null) cancelAnimationFrame(animationFrameRef.current);
+    };
   }, []);
 
   return (
-    <figure ref={frameRef} data-testid="tracking-portrait" className="tracking-portrait"
-      onPointerMove={handlePointerMove} onPointerLeave={() => setOffset(0, 0)}>
-      <img src="/artworks/contact-portrait.png" alt={alt} />
-      <span className="tracking-portrait__eye tracking-portrait__eye--left" aria-hidden="true"><i ref={(node) => { pupilRefs.current[0] = node; }} /></span>
-      <span className="tracking-portrait__eye tracking-portrait__eye--right" aria-hidden="true"><i ref={(node) => { pupilRefs.current[1] = node; }} /></span>
+    <figure className="tracking-portrait" data-testid="tracking-portrait">
+      <img src={assetPath('/artworks/contact-portrait.png')} alt={alt} />
+      <span className="tracking-portrait__eye tracking-portrait__eye--left" aria-hidden="true"
+        ref={(node) => { eyeRefs.current[0] = node; }}>
+        <i data-testid="pupil-left" ref={(node) => { pupilRefs.current[0] = node; }}
+          style={{ transform: centeredTransform }} />
+      </span>
+      <span className="tracking-portrait__eye tracking-portrait__eye--right" aria-hidden="true"
+        ref={(node) => { eyeRefs.current[1] = node; }}>
+        <i data-testid="pupil-right" ref={(node) => { pupilRefs.current[1] = node; }}
+          style={{ transform: centeredTransform }} />
+      </span>
     </figure>
   );
 }
@@ -157,16 +185,16 @@ Use an asymmetric grid and existing tokens:
   margin: 0;
   border: 1px solid var(--line);
   background: var(--surface);
-  aspect-ratio: 1180 / 1333;
+  aspect-ratio: 1179 / 1334;
 }
-.tracking-portrait > img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) brightness(.86); }
-.tracking-portrait__eye { position: absolute; width: 10%; height: 13%; border-radius: 50%; background: #f7f4ef; }
-.tracking-portrait__eye--left { left: 36.5%; top: 31.4%; }
-.tracking-portrait__eye--right { left: 55.3%; top: 31.4%; }
+.tracking-portrait > img { width: 100%; height: 100%; object-fit: cover; }
+.tracking-portrait__eye { position: absolute; top: 29.6%; overflow: hidden; width: 13.2%; height: 14.7%; border-radius: 48% 52% 46% 54%; }
+.tracking-portrait__eye--left { left: 33.6%; transform: rotate(-2deg); }
+.tracking-portrait__eye--right { left: 53.7%; transform: rotate(2deg); }
 .tracking-portrait__eye i {
   position: absolute;
   left: 50%; top: 50%;
-  width: 58%; height: 72%;
+  width: 52%; height: 68%;
   border-radius: 50%;
   background: #210d0d;
   transform: translate3d(-50%, -50%, 0);
@@ -181,7 +209,7 @@ Use an asymmetric grid and existing tokens:
 }
 ```
 
-Tune only the eye overlay percentages during visual QA so the centered layers cover the baked-in pupils without changing the overall composition.
+Tune only the transparent eye positioning boxes during visual QA; do not recreate or cover the pupil-free artwork's eye whites or contours.
 
 - [x] **Step 5: Run contact and portrait tests**
 

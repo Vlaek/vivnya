@@ -91,7 +91,6 @@ export function TrackingPortrait({ alt }: TrackingPortraitProps) {
           ref={(node) => { pupilRefs.current[0] = node; }}
           style={{ transform: centeredTransform }}
         />
-        <span className="tracking-portrait__eye-contour" data-testid="eye-contour-left" />
       </span>
       <span
         className="tracking-portrait__eye tracking-portrait__eye--right"
@@ -103,7 +102,6 @@ export function TrackingPortrait({ alt }: TrackingPortraitProps) {
           ref={(node) => { pupilRefs.current[1] = node; }}
           style={{ transform: centeredTransform }}
         />
-        <span className="tracking-portrait__eye-contour" data-testid="eye-contour-right" />
       </span>
     </figure>
   );

@@ -109,12 +109,11 @@ describe('TrackingPortrait', () => {
     });
   });
 
-  it('keeps the recreated eye whites behind a visible contour', () => {
-    const { container } = render(<TrackingPortrait alt="Character at a computer" />);
-    const leftEye = container.querySelector<HTMLElement>('.tracking-portrait__eye--left')!;
-    const contour = screen.getByTestId('eye-contour-left');
+  it('uses the eye whites and contours from the supplied artwork', () => {
+    render(<TrackingPortrait alt="Character at a computer" />);
 
-    expect(leftEye.lastElementChild).toBe(contour);
+    expect(screen.queryByTestId('eye-contour-left')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('eye-contour-right')).not.toBeInTheDocument();
   });
 
 });

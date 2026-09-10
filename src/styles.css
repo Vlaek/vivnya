@@ -326,7 +326,7 @@ img { display: block; max-width: 100%; }
   margin: 0;
   border: 1px solid var(--line);
   background: var(--surface);
-  aspect-ratio: 1180 / 1333;
+  aspect-ratio: 1179 / 1334;
 }
 .tracking-portrait > img {
   width: 100%;
@@ -335,15 +335,14 @@ img { display: block; max-width: 100%; }
 }
 .tracking-portrait__eye {
   position: absolute;
-  top: 30%;
+  top: 29.6%;
   overflow: hidden;
-  width: 11.5%;
-  height: 14%;
+  width: 13.2%;
+  height: 14.7%;
   border-radius: 48% 52% 46% 54%;
-  background: #f7f4ef;
 }
-.tracking-portrait__eye--left { left: 34.75%; transform: rotate(-2deg); }
-.tracking-portrait__eye--right { left: 54.75%; transform: rotate(2deg); }
+.tracking-portrait__eye--left { left: 33.6%; transform: rotate(-2deg); }
+.tracking-portrait__eye--right { left: 53.7%; transform: rotate(2deg); }
 .tracking-portrait__eye i {
   position: absolute;
   top: 50%;
@@ -365,14 +364,6 @@ img { display: block; max-width: 100%; }
   border-radius: 50%;
   background: #fff;
   content: "";
-}
-.tracking-portrait__eye-contour {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  border: clamp(2px, 0.2vw, 3px) solid #210d0d;
-  border-radius: inherit;
-  pointer-events: none;
 }
 .contact__footer {
   display: grid;

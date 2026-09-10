@@ -20,7 +20,7 @@ Keep the existing translated headline text and explicit Russian line breaks. Inc
 
 Store the supplied image as a local public asset and render it with a translated, descriptive alternative text. The image itself remains unchanged outside the eye regions.
 
-Because the pupils are baked into the raster image, cover each eye area with a carefully matched eye-white layer centered in the original socket and render a centered dark pupil with a small highlight above it. Listen for pointer movement across the full browser window. For each eye independently, calculate the unit vector from that eye's on-screen center to the cursor and apply a clamped offset along that vector. This makes the two gaze lines converge naturally on the cursor while each pupil remains inside its eye.
+Use the supplied pupil-free portrait as the base artwork, preserving its original eye whites and dark contours. Render only a centered dark pupil with a small highlight inside each existing eye. Listen for pointer movement across the full browser window. For each eye independently, calculate the unit vector from that eye's on-screen center to the cursor and apply a clamped offset along that vector. This makes the two gaze lines converge naturally on the cursor while each pupil remains inside its eye.
 
 Use `requestAnimationFrame` to coalesce pointer updates and write transforms directly to the two pupil elements. Reset the pupils to center when the browser window loses focus. The window-level listener must be removed on unmount. Do not attach a high-frequency React state update or drive child transforms through parent CSS variables.
 
@@ -45,4 +45,4 @@ Visual QA covers desktop and mobile widths, headline spacing, hierarchy, image c
 
 ## Out of Scope
 
-No change is made to the contact wording, ArtStation destination, global typography, project gallery, or other page sections. The source artwork is not otherwise redrawn or replaced.
+No change is made to the contact wording, ArtStation destination, global typography, project gallery, or other page sections. The supplied pupil-free source artwork is used without redrawing its eye whites or contours.
