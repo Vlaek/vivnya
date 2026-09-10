@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitch } from './LanguageSwitch';
+import { TrackingPortrait } from './TrackingPortrait';
 
 export function Contact() {
   const { t } = useTranslation();
@@ -7,14 +8,19 @@ export function Contact() {
 
   return (
     <footer className="contact section-shell" id="contact" aria-labelledby="contact-title">
-      <p className="section-eyebrow">{t('contact.eyebrow')}</p>
-      <h2 className="max-w-[15ch]! whitespace-pre-line text-[clamp(4rem,6vw,6rem)]! leading-none! max-md:max-w-none! max-md:text-[clamp(2.625rem,11.5vw,3rem)]!" id="contact-title">{t('contact.title')}</h2>
-      <div className="contact__row">
-        <p>
-          {t('contact.descriptionBefore')}
-          <a className="contact__inline-link" href="https://www.artstation.com/vivnya" target="_blank" rel="noreferrer">ArtStation</a>
-          {t('contact.descriptionAfter')}
-        </p>
+      <div className="contact__main">
+        <div className="contact__content">
+          <p className="section-eyebrow">{t('contact.eyebrow')}</p>
+          <h2 className="max-w-[15ch]! whitespace-pre-line text-[clamp(4rem,6vw,6rem)]! leading-[1.08]! max-md:max-w-none! max-md:text-[clamp(2.625rem,11.5vw,3rem)]!" id="contact-title">{t('contact.title')}</h2>
+          <div className="contact__row">
+            <p>
+              {t('contact.descriptionBefore')}
+              <a className="contact__inline-link" href="https://www.artstation.com/vivnya" target="_blank" rel="noreferrer">ArtStation</a>
+              {t('contact.descriptionAfter')}
+            </p>
+          </div>
+        </div>
+        <TrackingPortrait alt={t('contact.portraitAlt')} />
       </div>
       <div className="contact__footer">
         <span>{t('contact.copyright', { year })}</span>

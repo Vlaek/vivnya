@@ -27,4 +27,12 @@ describe('Contact', () => {
       { normalizeWhitespace: false },
     );
   });
+
+  it('renders the interactive portrait with localized alternative text', () => {
+    render(<Contact />);
+
+    expect(
+      screen.getByRole('img', { name: 'Стилизованный персонаж в наушниках за компьютером' }),
+    ).toBeInTheDocument();
+  });
 });
