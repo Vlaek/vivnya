@@ -16,4 +16,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - The site is bilingual RU/EN through i18next with a visible persisted language switch.
 - Use React, TypeScript, and Tailwind CSS v4.
 - Keep interactions restrained: short interruptible transitions, subtle clipped image reveals, `scale(0.97)` press feedback, and a reduced-motion path.
+- In the contact section, keep the oversized headline dominant and place the supplied character portrait in a narrower right-hand column. The portrait's pupils may be recreated as layered UI elements so they can track a fine pointer; keep them centered for touch and reduced-motion users.
 - Follow the workspace-root `AGENTS.md` typography, spacing, surface, color, radius, text-width, and final-review checklist.
