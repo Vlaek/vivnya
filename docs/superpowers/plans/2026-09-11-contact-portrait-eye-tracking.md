@@ -23,19 +23,17 @@ Copy `C:\Users\Vlad\AppData\Local\Temp\codex-clipboard-dfcf0531-0e10-481b-a10e-1
 
 - [ ] **Step 2: Write failing component tests**
 
-Create tests that render `<TrackingPortrait alt="Character at a computer" />`, assert the localized image alt is exposed, dispatch `pointerMove` with a mocked card rectangle and mocked `requestAnimationFrame`, and assert the wrapper receives bounded `--pupil-x` and `--pupil-y` values. Dispatch `pointerLeave` and assert both values reset to `0px`. Mock `window.matchMedia` so `(hover: hover) and (pointer: fine)` matches and `(prefers-reduced-motion: reduce)` does not.
+Create tests that render `<TrackingPortrait alt="Character at a computer" />`, assert the localized image alt is exposed, dispatch `pointerMove` with a mocked card rectangle and mocked `requestAnimationFrame`, and assert both pupil elements receive a bounded transform. Dispatch `pointerLeave` and assert both transforms reset to center. Mock `window.matchMedia` so `(hover: hover) and (pointer: fine)` matches and `(prefers-reduced-motion: reduce)` does not.
 
 ```tsx
 expect(screen.getByRole('img', { name: 'Character at a computer' })).toBeInTheDocument();
 fireEvent.pointerMove(screen.getByTestId('tracking-portrait'), { clientX: 1000, clientY: 1000 });
-expect(screen.getByTestId('tracking-portrait')).toHaveStyle({
-  '--pupil-x': '8px',
-  '--pupil-y': '8px',
+expect(screen.getByTestId('pupil-left')).toHaveStyle({
+  transform: 'translate3d(calc(-50% + 8px), calc(-50% + 8px), 0)',
 });
 fireEvent.pointerLeave(screen.getByTestId('tracking-portrait'));
-expect(screen.getByTestId('tracking-portrait')).toHaveStyle({
-  '--pupil-x': '0px',
-  '--pupil-y': '0px',
+expect(screen.getByTestId('pupil-left')).toHaveStyle({
+  transform: 'translate3d(-50%, -50%, 0)',
 });
 ```
 
@@ -47,7 +45,7 @@ Expected: FAIL because `TrackingPortrait.tsx` does not exist.
 
 - [ ] **Step 4: Implement the minimal component**
 
-Implement a figure with `data-testid="tracking-portrait"`, the portrait image, and two `aria-hidden="true"` eye overlays. In `onPointerMove`, bail out unless fine hover matches and reduced motion does not. Normalize the pointer against `getBoundingClientRect()`, clamp each axis to `[-1, 1]`, multiply by `8`, and set CSS custom properties in one scheduled animation frame. Cancel a pending frame during replacement and unmount. Reset both properties to `0px` on pointer leave.
+Implement a figure with `data-testid="tracking-portrait"`, the portrait image, and two `aria-hidden="true"` eye overlays. In `onPointerMove`, bail out unless fine hover matches and reduced motion does not. Normalize the pointer against `getBoundingClientRect()`, clamp each axis to `[-1, 1]`, multiply by `8`, and write the same direct `translate3d` transform to both pupil refs in one scheduled animation frame. Cancel a pending frame during replacement and unmount. Reset both transforms to center on pointer leave.
 
 ```tsx
 type TrackingPortraitProps = { alt: string };
@@ -56,13 +54,16 @@ const clamp = (value: number) => Math.max(-1, Math.min(1, value));
 
 export function TrackingPortrait({ alt }: TrackingPortraitProps) {
   const frameRef = useRef<HTMLElement>(null);
+  const pupilRefs = useRef<Array<HTMLElement | null>>([]);
   const rafRef = useRef<number | null>(null);
 
   const setOffset = (x: number, y: number) => {
-    const node = frameRef.current;
-    if (!node) return;
-    node.style.setProperty('--pupil-x', `${x}px`);
-    node.style.setProperty('--pupil-y', `${y}px`);
+    const transform = x === 0 && y === 0
+      ? 'translate3d(-50%, -50%, 0)'
+      : `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`;
+    pupilRefs.current.forEach((pupil) => {
+      if (pupil) pupil.style.transform = transform;
+    });
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
@@ -83,8 +84,8 @@ export function TrackingPortrait({ alt }: TrackingPortraitProps) {
     <figure ref={frameRef} data-testid="tracking-portrait" className="tracking-portrait"
       onPointerMove={handlePointerMove} onPointerLeave={() => setOffset(0, 0)}>
       <img src="/artworks/contact-portrait.png" alt={alt} />
-      <span className="tracking-portrait__eye tracking-portrait__eye--left" aria-hidden="true"><i /></span>
-      <span className="tracking-portrait__eye tracking-portrait__eye--right" aria-hidden="true"><i /></span>
+      <span className="tracking-portrait__eye tracking-portrait__eye--left" aria-hidden="true"><i ref={(node) => { pupilRefs.current[0] = node; }} /></span>
+      <span className="tracking-portrait__eye tracking-portrait__eye--right" aria-hidden="true"><i ref={(node) => { pupilRefs.current[1] = node; }} /></span>
     </figure>
   );
 }
@@ -142,6 +143,7 @@ Import `TrackingPortrait` into `Contact.tsx`. Wrap the eyebrow, heading, and con
 Use an asymmetric grid and existing tokens:
 
 ```css
+:root { --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); }
 .contact__main {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
@@ -150,8 +152,6 @@ Use an asymmetric grid and existing tokens:
 }
 .contact h2 { line-height: 1.08; }
 .tracking-portrait {
-  --pupil-x: 0px;
-  --pupil-y: 0px;
   position: relative;
   overflow: hidden;
   margin: 0;
@@ -169,15 +169,15 @@ Use an asymmetric grid and existing tokens:
   width: 58%; height: 72%;
   border-radius: 50%;
   background: #210d0d;
-  transform: translate(calc(-50% + var(--pupil-x)), calc(-50% + var(--pupil-y)));
-  transition: transform 90ms linear;
+  transform: translate3d(-50%, -50%, 0);
+  transition: transform 120ms var(--ease-in-out);
 }
 @media (max-width: 780px) {
   .contact__main { display: block; }
   .tracking-portrait { width: min(100%, 420px); margin: 48px auto 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tracking-portrait__eye i { transform: translate(-50%, -50%); }
+  .tracking-portrait__eye i { transform: translate3d(-50%, -50%, 0) !important; }
 }
 ```
 

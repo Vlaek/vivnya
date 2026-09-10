@@ -22,7 +22,7 @@ Store the supplied image as a local public asset and render it with a translated
 
 Because the pupils are baked into the raster image, cover each pupil area with a carefully matched eye-white layer and render a dark pupil with a small highlight above it. Pointer movement is normalized against the portrait card's center. Each pupil receives the same clamped offset, limited to a small range so it remains inside its eye.
 
-Use `requestAnimationFrame` to coalesce pointer updates and CSS transforms for rendering. Reset the pupils toward center when the pointer leaves the card. Do not attach a document-wide high-frequency React state update.
+Use `requestAnimationFrame` to coalesce pointer updates and write transforms directly to the two pupil elements. Reset the pupils toward center when the pointer leaves the card. Do not attach a document-wide high-frequency React state update or drive child transforms through parent CSS variables.
 
 Eye tracking is enabled only for a fine hover-capable pointer. On touch devices, when JavaScript is unavailable, and when `prefers-reduced-motion: reduce` is active, pupils remain centered. The eye overlays are decorative and hidden from assistive technology.
 
