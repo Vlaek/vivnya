@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { assetPath } from '../content/assetPath';
 
 export function About() {
   const { t } = useTranslation();
@@ -14,6 +15,9 @@ export function About() {
       <div className="section-heading about__heading">
         <p className="section-eyebrow">{t('about.eyebrow')}</p>
         <h2 id="about-title">{t('about.title')}</h2>
+        <div className="about__avatar">
+          <img src={assetPath('/artworks/about-avatar.png')} alt={t('about.portraitAlt')} />
+        </div>
       </div>
       <div className="about__content">
         <p className="about__lead">{t('about.lead')}</p>
