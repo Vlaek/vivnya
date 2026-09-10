@@ -17,4 +17,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Use React, TypeScript, and Tailwind CSS v4.
 - Keep interactions restrained: short interruptible transitions, subtle clipped image reveals, `scale(0.97)` press feedback, and a reduced-motion path.
 - In the contact section, keep the oversized headline dominant and place the supplied character portrait in a narrower right-hand column. The portrait's pupils may be recreated as layered UI elements so they can track a fine pointer; keep them centered for touch and reduced-motion users.
+- In the About section, keep Milana's supplied portrait in a large circular frame below the heading. Match its diameter to the rendered width of the About title, preserve the full head in the crop, and use the muted-magenta `#d45888` for the 3 px outline.
 - Follow the workspace-root `AGENTS.md` typography, spacing, surface, color, radius, text-width, and final-review checklist.

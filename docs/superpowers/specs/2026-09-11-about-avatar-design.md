@@ -13,9 +13,9 @@ Add the supplied portrait to the “About” section without weakening the exist
 ## Avatar treatment
 
 - Use the user-supplied PNG as a local public artwork asset.
-- Render it as a circle with `object-fit: cover` and a centered crop.
+- Render it as a circle with `object-fit: contain`; shift it down slightly so the full head remains visible.
 - Use a `3px solid #d45888` border.
-- Use `width: clamp(200px, 18vw, 240px)` on desktop and a fixed `176px` diameter on screens up to 780 px wide.
+- Make the heading wrapper shrink to its content, set the avatar to `width: 100%`, and apply inline-size containment so the image cannot widen the wrapper beyond the localized About title.
 - Do not add a shadow or additional surface treatment.
 - Provide descriptive alternative text in both supported languages through the existing i18n system.
 

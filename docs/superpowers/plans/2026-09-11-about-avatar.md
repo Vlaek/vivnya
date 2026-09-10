@@ -93,8 +93,13 @@ Inside `.about__heading`, after the `h2`, add:
 Add:
 
 ```css
+.about__heading {
+  width: fit-content;
+  max-width: 100%;
+}
 .about__avatar {
-  width: clamp(200px, 18vw, 240px);
+  width: 100%;
+  contain: inline-size;
   aspect-ratio: 1;
   margin-top: 32px;
   overflow: hidden;
@@ -104,8 +109,8 @@ Add:
 .about__avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 50% 30%;
+  object-fit: contain;
+  transform: translateY(8px) scale(0.96);
 }
 ```
 
@@ -114,7 +119,7 @@ Add:
 Inside `@media (max-width: 780px)`, add:
 
 ```css
-.about__avatar { width: 176px; margin-top: 24px; }
+.about__avatar { margin-top: 24px; }
 ```
 
 Change `.about__content { margin-top: 56px; }` to `.about__content { margin-top: 40px; }` so the avatar and copy read as one balanced group.
