@@ -22,19 +22,19 @@ export function About() {
       <div className="about__content">
         <p className="about__lead">{t('about.lead')}</p>
         <p className="about__body">{t('about.body')}</p>
+        <dl className="about__facts">
+          {facts.map(([label, value]) => (
+            <div key={label}>
+              <dt>{t(label)}</dt>
+              <dd className="flex flex-col gap-1">
+                {(t(value, { returnObjects: true }) as string[]).map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
-      <dl className="about__facts">
-        {facts.map(([label, value]) => (
-          <div key={label}>
-            <dt>{t(label)}</dt>
-            <dd className="flex flex-col gap-1">
-              {(t(value, { returnObjects: true }) as string[]).map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </dd>
-          </div>
-        ))}
-      </dl>
     </section>
   );
 }

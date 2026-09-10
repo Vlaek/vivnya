@@ -16,4 +16,11 @@ describe('About', () => {
       '/artworks/about-avatar.png',
     );
   });
+
+  it('groups the profile facts with the biography in the right column', () => {
+    render(<About />);
+
+    const biographyColumn = screen.getByText(/Создаю иллюстрации/).closest('.about__content');
+    expect(biographyColumn).toContainElement(screen.getByText('Специализация'));
+  });
 });
