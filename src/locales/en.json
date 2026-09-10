@@ -35,6 +35,23 @@
     "spirits": { "category": "Creature concept", "alt": "Four Slavic fantasy creatures including a werewolf, Sirin and forest spirit", "gallery": ["Slavic creatures and spirits lineup", "Forest monster concept", "Sirin bird concept", "Volkolak concept", "Blud spirit concept"] },
     "animals": { "category": "Creature concept", "alt": "Stylized deer, wolf, boar and hare character lineup", "gallery": ["Stylized animal lineup", "Deer concept", "Wolf concept", "Boar concept", "Hare concept", "Deer silhouettes", "Animal silhouette lineup", "Hare silhouettes"] }
   },
+  "comics": {
+    "eyebrow": "Narrative projects",
+    "title": "Comics",
+    "project": {
+      "category": "Game comic · Part 1",
+      "description": "A narrative insert for an adventure comedy point-and-click game — from early drafts to final art.",
+      "alt": "First page of The Stone of Eternity game comic",
+      "gallery": [
+        "Final page 1: Ivan plays at his computer and gets a phone call from his mother",
+        "Final page 2: Ivan searches for work at night and applies for a museum job",
+        "Final page 3: Ivan receives a job invitation for 9 PM and rushes to get dressed",
+        "Final page 4: Ivan chases a bus and arrives at the Museum of Arts",
+        "Clean line art for the first comic page",
+        "Rough numbered storyboard for the comic sequence"
+      ]
+    }
+  },
   "about": {
     "eyebrow": "Artist profile",
     "title": "About",

@@ -1,17 +1,15 @@
 import { assetPath } from './assetPath';
+import type { GalleryItem, GalleryProject } from './gallery';
 
 export type ProjectId = 'horde' | 'koshchei' | 'spirits' | 'animals' | 'wolf';
 
-export type ProjectGalleryItem = { src: string; altKey: string };
+export type ProjectGalleryItem = GalleryItem;
 
-export type Project = {
+export type Project = GalleryProject & {
   id: ProjectId;
-  title: string;
-  href: string;
   image: string;
   translationKey: `projects.${ProjectId}`;
   focalPoint: string;
-  gallery: ProjectGalleryItem[];
   featured?: boolean;
 };
 

@@ -2,9 +2,9 @@ import { ArrowUpRight, CaretLeft, CaretRight, X } from '@phosphor-icons/react';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import type { Project } from '../content/projects';
+import type { GalleryProject } from '../content/gallery';
 
-type ProjectLightboxProps = { project: Project; onClose: () => void };
+type ProjectLightboxProps = { project: GalleryProject; onClose: () => void };
 
 export function ProjectLightbox({ project, onClose }: ProjectLightboxProps) {
   const { t } = useTranslation();
@@ -94,7 +94,7 @@ export function ProjectLightbox({ project, onClose }: ProjectLightboxProps) {
           </button>
         </div>
 
-        <div className="flex shrink-0 gap-2 overflow-x-auto border-t border-white/15 pt-4" aria-label={t('lightbox.thumbnails')}>
+        <div className="flex shrink-0 gap-2 overflow-x-auto border-t border-white/15 pt-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label={t('lightbox.thumbnails')}>
           {project.gallery.map((item, itemIndex) => (
             <button className="h-16 w-24 shrink-0 cursor-pointer overflow-hidden border-2 transition-colors duration-200 ease-out data-[active=true]:border-[var(--accent)] data-[active=false]:border-transparent md:h-20 md:w-28" type="button" key={item.src} data-active={itemIndex === index} onClick={() => setIndex(itemIndex)} aria-label={t('lightbox.image', { current: itemIndex + 1, total })} aria-current={itemIndex === index ? 'true' : undefined}>
               <img className="h-full w-full object-cover" src={item.src} alt="" loading="lazy" />

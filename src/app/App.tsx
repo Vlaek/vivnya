@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
 import { WorkGrid } from '../components/WorkGrid';
+import { ComicsSection } from '../components/ComicsSection';
 import { About } from '../components/About';
 import { Contact } from '../components/Contact';
 
@@ -15,6 +16,7 @@ export function App() {
       <main id="main-content">
         <Hero />
         <WorkGrid />
+        <ComicsSection />
         <About />
         <Contact />
       </main>
