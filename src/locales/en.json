@@ -38,18 +38,39 @@
   "comics": {
     "eyebrow": "Narrative projects",
     "title": "Comics",
-    "project": {
-      "category": "Game comic · Part 1",
-      "description": "A narrative insert for an adventure comedy point-and-click game — from early drafts to final art.",
-      "alt": "First page of The Stone of Eternity game comic",
-      "gallery": [
-        "Final page 1: Ivan plays at his computer and gets a phone call from his mother",
-        "Final page 2: Ivan searches for work at night and applies for a museum job",
-        "Final page 3: Ivan receives a job invitation for 9 PM and rushes to get dressed",
-        "Final page 4: Ivan chases a bus and arrives at the Museum of Arts",
-        "Clean line art for the first comic page",
-        "Rough numbered storyboard for the comic sequence"
-      ]
+    "seriesTitle": "The Stone of Eternity",
+    "partsLabel": "Comic parts",
+    "partsNavigation": "Navigate between comic parts",
+    "previousPart": "Previous part",
+    "nextPart": "Next part",
+    "partCounter": "Part {{current}} of {{total}}",
+    "parts": {
+      "part1": {
+        "tab": "Part 1",
+        "title": "Part 1",
+        "category": "Game comic",
+        "description": "A narrative insert for an adventure comedy point-and-click game — from early drafts to final art.",
+        "alt": "First page of The Stone of Eternity game comic",
+        "gallery": [
+          "Final page 1: Ivan plays at his computer and gets a phone call from his mother",
+          "Final page 2: Ivan searches for work at night and applies for a museum job",
+          "Final page 3: Ivan receives a job invitation for 9 PM and rushes to get dressed",
+          "Final page 4: Ivan chases a bus and arrives at the Museum of Arts",
+          "Clean line art for the first comic page",
+          "Rough numbered storyboard for the comic sequence"
+        ]
+      },
+      "part2": {
+        "tab": "Part 2",
+        "title": "Part 2",
+        "category": "Game comic",
+        "description": "A continuation of the game comic, developed from sketch to final art with a particular focus on the character’s emotions.",
+        "alt": "First page of The Stone of Eternity game comic, part two",
+        "gallery": [
+          "Ivan studies museum paintings, notices a hammer and celebrates his discovery",
+          "Ivan picks up the hammer, breaks the display glass and recoils in fear"
+        ]
+      }
     }
   },
   "about": {
@@ -59,7 +80,7 @@
     "lead": "I create illustrations and concept art for game projects — from the first sketch to the final render.",
     "body": "I focus on clear technical requirements and visual consistency across every production stage. I respond quickly to feedback and work closely with teams to turn ideas into polished, coherent worlds.",
     "specialtyLabel": "Specialty",
-    "specialty": ["Concept art", "Illustration", "Comics"],
+    "specialty": ["Concept art", "Illustration", "Comics", "Animation"],
     "toolsLabel": "Tools",
     "tools": ["Adobe Photoshop", "Procreate"],
     "interestLabel": "Available for",

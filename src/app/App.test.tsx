@@ -12,7 +12,7 @@ describe('App shell', () => {
     render(<App />);
 
     expect(screen.getByRole('heading', { level: 1, name: /vivnya/i })).toBeVisible();
-    expect(screen.getByRole('navigation')).toBeVisible();
+    expect(screen.getByRole('navigation', { name: 'Portfolio navigation' })).toBeVisible();
     expect(screen.getAllByRole('main')).toHaveLength(1);
     expect(screen.getByRole('link', { name: /skip to content/i })).toHaveAttribute(
       'href',

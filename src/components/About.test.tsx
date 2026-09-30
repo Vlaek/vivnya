@@ -22,5 +22,13 @@ describe('About', () => {
 
     const biographyColumn = screen.getByText(/Создаю иллюстрации/).closest('.about__content');
     expect(biographyColumn).toContainElement(screen.getByText('Специализация'));
+    expect(screen.getByText('Анимация')).toBeVisible();
+  });
+
+  it('renders the animation specialty in English', async () => {
+    await i18n.changeLanguage('en');
+    render(<About />);
+
+    expect(screen.getByText('Animation')).toBeVisible();
   });
 });

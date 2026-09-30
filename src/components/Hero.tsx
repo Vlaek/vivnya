@@ -19,7 +19,7 @@ export function Hero() {
         </div>
       </div>
       <a className="hero__scroll" href="#work" aria-label={t('nav.work')}>
-        <ArrowDown aria-hidden="true" />
+        <ArrowDown className="hero__scroll-icon" aria-hidden="true" />
       </a>
     </section>
   );
