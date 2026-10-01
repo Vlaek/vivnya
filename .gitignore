@@ -2,5 +2,7 @@ node_modules/
 dist/
 *.tsbuildinfo
 .vite/
-references/qa/
+.codesight/
+references/
 .superpowers/
+docs/superpowers/
