@@ -1,27 +1,37 @@
-import { useTranslation } from 'react-i18next';
-import { assetPath } from '../content/assetPath';
+import { useTranslation } from "react-i18next";
+import { assetPath } from "../content/assetPath";
 
 export function About() {
   const { t } = useTranslation();
 
   const facts = [
-    ['about.specialtyLabel', 'about.specialty'],
-    ['about.toolsLabel', 'about.tools'],
-    ['about.interestLabel', 'about.interest'],
+    ["about.specialtyLabel", "about.specialty"],
+    ["about.toolsLabel", "about.tools"],
+    ["about.interestLabel", "about.interest"],
   ] as const;
 
   return (
-    <section className="about section-shell" id="about" aria-labelledby="about-title">
+    <section
+      className="about section-shell"
+      id="about"
+      aria-labelledby="about-title"
+    >
       <div className="section-heading about__heading">
-        <p className="section-eyebrow">{t('about.eyebrow')}</p>
-        <h2 id="about-title">{t('about.title')}</h2>
+        <p className="section-eyebrow">{t("about.eyebrow")}</p>
+        <h2 id="about-title">{t("about.title")}</h2>
         <div className="about__avatar">
-          <img src={assetPath('/artworks/about-avatar.png')} alt={t('about.portraitAlt')} />
+          <img
+            style={{ userSelect: "none" }}
+            draggable={false}
+            onDragStart={(event) => event.preventDefault()}
+            src={assetPath("/artworks/about-avatar.png")}
+            alt={t("about.portraitAlt")}
+          />
         </div>
       </div>
       <div className="about__content">
-        <p className="about__lead">{t('about.lead')}</p>
-        <p className="about__body">{t('about.body')}</p>
+        <p className="about__lead">{t("about.lead")}</p>
+        <p className="about__body">{t("about.body")}</p>
         <dl className="about__facts">
           {facts.map(([label, value]) => (
             <div key={label}>

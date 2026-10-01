@@ -8,8 +8,17 @@
     "title": "Milana Zubareva. Vivnya",
     "description": "Portfolio of Milana Zubareva (Vivnya), a 2D artist creating illustration and concept art for game projects."
   },
-  "a11y": { "skip": "Skip to content", "home": "Vivnya — home", "navigation": "Portfolio navigation" },
-  "nav": { "work": "Work", "animations": "Animations", "about": "About", "contact": "Contact" },
+  "a11y": {
+    "skip": "Skip to content",
+    "home": "Vivnya — home",
+    "navigation": "Portfolio navigation"
+  },
+  "nav": {
+    "work": "Work",
+    "animations": "Animations",
+    "about": "About",
+    "contact": "Contact"
+  },
   "animations": {
     "eyebrow": "Stories in motion",
     "title": "Animations",
@@ -35,11 +44,58 @@
     "image": "Image {{current}} of {{total}}"
   },
   "projects": {
-    "wolf": { "category": "Promo art", "alt": "Golden wolf standing in a luminous forest surrounded by a shadowy pack", "gallery": ["Golden wolf promo art with the project logo", "Golden wolf promo art without the project logo"] },
-    "horde": { "category": "Character concept", "alt": "Four stylized fantasy members of Koshchei’s horde", "gallery": ["Koshchei's Horde character lineup", "Koshchei's Horde character concept one", "Koshchei's Horde character concept two", "Koshchei's Horde character concept three", "Koshchei's Horde character concept four"] },
-    "koshchei": { "category": "Character concept", "alt": "Armored undead king Koshchei holding a sword and a glowing stone", "gallery": ["Final Koshchei character concept", "Koshchei character design process"] },
-    "spirits": { "category": "Creature concept", "alt": "Four Slavic fantasy creatures including a werewolf, Sirin and forest spirit", "gallery": ["Slavic creatures and spirits lineup", "Forest monster concept", "Sirin bird concept", "Volkolak concept", "Blud spirit concept"] },
-    "animals": { "category": "Creature concept", "alt": "Stylized deer, wolf, boar and hare character lineup", "gallery": ["Stylized animal lineup", "Deer concept", "Wolf concept", "Boar concept", "Hare concept", "Deer silhouettes", "Animal silhouette lineup", "Hare silhouettes"] }
+    "wolf": {
+      "category": "Promo art",
+      "alt": "Golden wolf standing in a luminous forest surrounded by a shadowy pack",
+      "gallery": [
+        "Golden wolf promo art with the project logo",
+        "Golden wolf promo art without the project logo"
+      ]
+    },
+    "horde": {
+      "category": "Character concept",
+      "alt": "Four stylized fantasy members of Koshchei’s horde",
+      "gallery": [
+        "Koshchei's Horde character lineup",
+        "Koshchei's Horde character concept one",
+        "Koshchei's Horde character concept two",
+        "Koshchei's Horde character concept three",
+        "Koshchei's Horde character concept four"
+      ]
+    },
+    "koshchei": {
+      "category": "Character concept",
+      "alt": "Armored undead king Koshchei holding a sword and a glowing stone",
+      "gallery": [
+        "Final Koshchei character concept",
+        "Koshchei character design process"
+      ]
+    },
+    "spirits": {
+      "category": "Creature concept",
+      "alt": "Four Slavic fantasy creatures including a werewolf, Sirin and forest spirit",
+      "gallery": [
+        "Slavic creatures and spirits lineup",
+        "Forest monster concept",
+        "Sirin bird concept",
+        "Volkolak concept",
+        "Blud spirit concept"
+      ]
+    },
+    "animals": {
+      "category": "Creature concept",
+      "alt": "Stylized deer, wolf, boar and hare character lineup",
+      "gallery": [
+        "Stylized animal lineup",
+        "Deer concept",
+        "Wolf concept",
+        "Boar concept",
+        "Hare concept",
+        "Deer silhouettes",
+        "Animal silhouette lineup",
+        "Hare silhouettes"
+      ]
+    }
   },
   "comics": {
     "eyebrow": "Narrative projects",

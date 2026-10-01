@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react';
-import { assetPath } from '../content/assetPath';
+import { useEffect, useRef } from "react";
+import { assetPath } from "../content/assetPath";
 
 type TrackingPortraitProps = {
   alt: string;
 };
 
-const centeredTransform = 'translate3d(-50%, -50%, 0)';
+const centeredTransform = "translate3d(-50%, -50%, 0)";
 const pupilTravel = 5;
 const clamp = (value: number) => Math.max(-1, Math.min(1, value));
 
@@ -18,35 +18,46 @@ export function TrackingPortrait({ alt }: TrackingPortraitProps) {
     pupilRefs.current.forEach((pupil, index) => {
       if (!pupil) return;
       const { x, y } = offsets[index] ?? { x: 0, y: 0 };
-      pupil.style.transform = x === 0 && y === 0
-        ? centeredTransform
-        : `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`;
+      pupil.style.transform =
+        x === 0 && y === 0
+          ? centeredTransform
+          : `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`;
     });
   };
 
-  const centerPupils = () => setPupilOffsets([{ x: 0, y: 0 }, { x: 0, y: 0 }]);
+  const centerPupils = () =>
+    setPupilOffsets([
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+    ]);
 
   useEffect(() => {
     const resetPupils = () => {
-      if (animationFrameRef.current !== null) cancelAnimationFrame(animationFrameRef.current);
+      if (animationFrameRef.current !== null)
+        cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
       centerPupils();
     };
 
     const handlePointerMove = (event: PointerEvent) => {
-      if (event.pointerType === 'touch') {
+      if (event.pointerType === "touch") {
         resetPupils();
         return;
       }
 
-      const supportsTracking = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const supportsTracking = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+      ).matches;
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       if (!supportsTracking || reducedMotion) {
         resetPupils();
         return;
       }
 
-      if (animationFrameRef.current !== null) cancelAnimationFrame(animationFrameRef.current);
+      if (animationFrameRef.current !== null)
+        cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = requestAnimationFrame(() => {
         const offsets = eyeRefs.current.map((eye) => {
           if (!eye) return { x: 0, y: 0 };
@@ -65,41 +76,53 @@ export function TrackingPortrait({ alt }: TrackingPortraitProps) {
       });
     };
 
-    window.addEventListener('pointermove', handlePointerMove);
-    window.addEventListener('blur', resetPupils);
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("blur", resetPupils);
 
     return () => {
-      window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('blur', resetPupils);
-      if (animationFrameRef.current !== null) cancelAnimationFrame(animationFrameRef.current);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("blur", resetPupils);
+      if (animationFrameRef.current !== null)
+        cancelAnimationFrame(animationFrameRef.current);
     };
   }, []);
 
   return (
-    <figure
-      className="tracking-portrait"
-      data-testid="tracking-portrait"
-    >
-      <img src={assetPath('/artworks/contact-portrait.png')} alt={alt} />
+    <figure className="tracking-portrait" data-testid="tracking-portrait">
+      <img
+        style={{ userSelect: "none" }}
+        draggable={false}
+        onDragStart={(event) => event.preventDefault()}
+        src={assetPath("/artworks/contact-portrait.png")}
+        alt={alt}
+      />
       <span
         className="tracking-portrait__eye tracking-portrait__eye--left"
         aria-hidden="true"
-        ref={(node) => { eyeRefs.current[0] = node; }}
+        ref={(node) => {
+          eyeRefs.current[0] = node;
+        }}
       >
         <i
           data-testid="pupil-left"
-          ref={(node) => { pupilRefs.current[0] = node; }}
+          ref={(node) => {
+            pupilRefs.current[0] = node;
+          }}
           style={{ transform: centeredTransform }}
         />
       </span>
       <span
         className="tracking-portrait__eye tracking-portrait__eye--right"
         aria-hidden="true"
-        ref={(node) => { eyeRefs.current[1] = node; }}
+        ref={(node) => {
+          eyeRefs.current[1] = node;
+        }}
       >
         <i
           data-testid="pupil-right"
-          ref={(node) => { pupilRefs.current[1] = node; }}
+          ref={(node) => {
+            pupilRefs.current[1] = node;
+          }}
           style={{ transform: centeredTransform }}
         />
       </span>

@@ -1,8 +1,13 @@
-import { ArrowLeft, ArrowRight, ArrowUpRight, CornersOut } from '@phosphor-icons/react';
-import { useCallback, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { comics } from '../content/comics';
-import { ProjectLightbox } from './ProjectLightbox';
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  CornersOut,
+} from "@phosphor-icons/react";
+import { useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { comics } from "../content/comics";
+import { ProjectLightbox } from "./ProjectLightbox";
 
 export function ComicsSection() {
   const { t } = useTranslation();
@@ -27,22 +32,22 @@ export function ComicsSection() {
       id="comics"
       aria-labelledby="comics-title"
     >
-      <p className="section-eyebrow">{t('comics.eyebrow')}</p>
+      <p className="section-eyebrow">{t("comics.eyebrow")}</p>
       <h2
         id="comics-title"
         className="m-0 font-['Oswald_Variable'] text-[clamp(64px,8.5vw,144px)] leading-[0.94] font-[560] tracking-[-0.045em] uppercase"
       >
-        {t('comics.title')}
+        {t("comics.title")}
       </h2>
 
       <div className="mt-10 md:mt-14">
         <h3 className="m-0 font-['Oswald_Variable'] text-[clamp(34px,5vw,68px)] leading-none font-[560] tracking-[-0.035em] uppercase">
-          {t('comics.seriesTitle')}
+          {t("comics.seriesTitle")}
         </h3>
         <div
           className="mt-6 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           role="tablist"
-          aria-label={t('comics.partsLabel')}
+          aria-label={t("comics.partsLabel")}
         >
           {comics.map((item, index) => (
             <button
@@ -73,7 +78,7 @@ export function ComicsSection() {
           className="group relative block w-full cursor-pointer self-start overflow-hidden bg-[var(--surface)] text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
           type="button"
           onClick={() => setIsOpen(true)}
-          aria-label={t('work.viewGallery', { title: comic.title })}
+          aria-label={t("work.viewGallery", { title: comic.title })}
         >
           <img
             className="aspect-video w-full object-cover transition-transform duration-500 ease-out motion-reduce:transition-none group-hover:scale-[1.015]"
@@ -104,7 +109,7 @@ export function ComicsSection() {
             href={comic.href}
             target="_blank"
             rel="noreferrer"
-            aria-label={t('work.open', { title: comic.title })}
+            aria-label={t("work.open", { title: comic.title })}
           >
             <span>ArtStation</span>
             <ArrowUpRight size={20} aria-hidden="true" />
@@ -112,33 +117,41 @@ export function ComicsSection() {
         </div>
       </article>
 
-      <nav className="mt-8 flex items-center justify-between gap-4 border-t border-[var(--line)] pt-5" aria-label={t('comics.partsNavigation')}>
+      <nav
+        className="mt-8 flex items-center justify-between gap-4 border-t border-[var(--line)] pt-5"
+        aria-label={t("comics.partsNavigation")}
+      >
         <button
           className="comic-part-navigation inline-flex min-h-11 cursor-pointer items-center gap-2 text-sm font-semibold text-[var(--ink)] transition-colors duration-200 disabled:cursor-default disabled:opacity-30"
           type="button"
           disabled={activeIndex === 0}
           onClick={() => selectPart(activeIndex - 1)}
-          aria-label={t('comics.previousPart')}
+          aria-label={t("comics.previousPart")}
         >
           <ArrowLeft size={18} aria-hidden="true" />
-          <span className="max-sm:hidden">{t('comics.previousPart')}</span>
+          <span className="max-sm:hidden">{t("comics.previousPart")}</span>
         </button>
         <p className="m-0 text-sm text-[var(--muted)]">
-          {t('comics.partCounter', { current: activeIndex + 1, total: comics.length })}
+          {t("comics.partCounter", {
+            current: activeIndex + 1,
+            total: comics.length,
+          })}
         </p>
         <button
           className="comic-part-navigation inline-flex min-h-11 cursor-pointer items-center gap-2 text-sm font-semibold text-[var(--ink)] transition-colors duration-200 disabled:cursor-default disabled:opacity-30"
           type="button"
           disabled={activeIndex === comics.length - 1}
           onClick={() => selectPart(activeIndex + 1)}
-          aria-label={t('comics.nextPart')}
+          aria-label={t("comics.nextPart")}
         >
-          <span className="max-sm:hidden">{t('comics.nextPart')}</span>
+          <span className="max-sm:hidden">{t("comics.nextPart")}</span>
           <ArrowRight size={18} aria-hidden="true" />
         </button>
       </nav>
 
-      {isOpen ? <ProjectLightbox project={comic} onClose={closeLightbox} /> : null}
+      {isOpen ? (
+        <ProjectLightbox project={comic} onClose={closeLightbox} />
+      ) : null}
     </section>
   );
 }
