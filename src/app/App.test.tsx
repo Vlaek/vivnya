@@ -19,4 +19,20 @@ describe('App shell', () => {
       '#main-content',
     );
   });
+
+  it.each(['en', 'ru'])('includes the animation video and navigation in %s', async (language) => {
+    await i18n.changeLanguage(language);
+    const { container } = render(<App />);
+    const label = language === 'ru' ? 'Анимации' : 'Animations';
+    expect(screen.getByRole('region', { name: label })).toBeVisible();
+    expect(screen.getByRole('link', { name: label })).toHaveAttribute('href', '#animations');
+    const player = screen.getByTitle('Kapishche — Animatic');
+    expect(player).toHaveAttribute('src', 'https://www.youtube-nocookie.com/embed/RRoTocAVguE?rel=0');
+    expect(player).toHaveAttribute('allowFullScreen');
+    expect(player).toHaveAttribute('loading', 'lazy');
+    expect(container.querySelector('#comics')?.nextElementSibling).toHaveAttribute('id', 'animations');
+    expect(screen.getByRole('link', { name: /Kapishche — Animatic.*ArtStation/i })).toHaveAttribute(
+      'href', 'https://www.artstation.com/artwork/o0JlVw',
+    );
+  });
 });

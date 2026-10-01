@@ -3,6 +3,7 @@ import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
 import { WorkGrid } from '../components/WorkGrid';
 import { ComicsSection } from '../components/ComicsSection';
+import { AnimationsSection } from '../components/AnimationsSection';
 import { About } from '../components/About';
 import { Contact } from '../components/Contact';
 
@@ -17,6 +18,7 @@ export function App() {
         <Hero />
         <WorkGrid />
         <ComicsSection />
+        <AnimationsSection />
         <About />
         <Contact />
       </main>

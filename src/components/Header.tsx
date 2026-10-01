@@ -8,6 +8,7 @@ export function Header() {
     <header className="site-header">
       <nav className="site-nav" aria-label={t('a11y.navigation')}>
         <a href="#work">{t('nav.work')}</a>
+        <a href="#animations">{t('nav.animations')}</a>
         <a href="#about">{t('nav.about')}</a>
         <a href="#contact">{t('nav.contact')}</a>
       </nav>

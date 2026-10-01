@@ -9,7 +9,13 @@
     "description": "Portfolio of Milana Zubareva (Vivnya), a 2D artist creating illustration and concept art for game projects."
   },
   "a11y": { "skip": "Skip to content", "home": "Vivnya — home", "navigation": "Portfolio navigation" },
-  "nav": { "work": "Work", "about": "About", "contact": "Contact" },
+  "nav": { "work": "Work", "animations": "Animations", "about": "About", "contact": "Contact" },
+  "animations": {
+    "eyebrow": "Stories in motion",
+    "title": "Animations",
+    "category": "Game animatic",
+    "description": "An animatic for the game project Kapishche, created as part of a coursework project. Conceived as a trailer revealing one of the game's storylines. Most frames were animated frame by frame, apart from zooms and transitions."
+  },
   "hero": {
     "name": "Milana Zubareva",
     "role": "2D Artist",
